@@ -71,3 +71,21 @@ describe('find', () => {
     expect(model.find(1)).toEqual(heroes[0]);
   });
 });
+
+describe('update', () => {
+  test('should update a record', () => {
+    const heroes = [
+      { id: 1, name: 'Batman' },
+      {
+        id: 2,
+        name: 'Superman',
+      },
+    ];
+    const model = new Model(heroes);
+    model.update(2, { name: 'Clark Kent' });
+    expect(model.find(2)).toEqual({
+      id: 2,
+      name: 'Clark Kent',
+    });
+  });
+});
