@@ -32,3 +32,21 @@ describe('record', () => {
     spy.mockRestore();
   });
 });
+
+describe('all', () => {
+  test('return empty model', () => {
+    const model = new Model();
+    expect(model.all()).toEqual([]);
+  });
+  test('return model data', () => {
+    const model = new Model([{ name: 'Batman' }, { name: 'Superman' }]);
+    expect(model.all()).length.toBe(2);
+  });
+
+  test('original data stays inact', () => {
+    const heroes = [{ name: 'Batman' }, { name: 'Superman' }];
+    const model = new Model(heroes);
+    expect(model.all()).toEqual(heroes);
+    expect(model.all()).not.toBe(heroes);
+  });
+});
