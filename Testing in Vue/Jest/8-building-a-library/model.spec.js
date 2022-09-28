@@ -50,3 +50,24 @@ describe('all', () => {
     expect(model.all()).not.toBe(heroes);
   });
 });
+
+describe('find', () => {
+  test('should return undefined if no data', () => {
+    const model = new Model();
+    expect(model.find()).toBeUndefined();
+  });
+
+  test('should be null if no data', () => {
+    const model = new Model();
+    expect(model.find()).toBeNull();
+  });
+
+  test('should find a record by id', () => {
+    const heroes = [
+      { id: 1, name: 'Batman' },
+      { id: 2, name: 'Superman' },
+    ];
+    const model = new Model(heroes);
+    expect(model.find(1)).toEqual(heroes[0]);
+  });
+});
