@@ -15,3 +15,20 @@ test('model structure', () => {
     })
   );
 });
+
+describe('record', () => {
+  const heroes = [{ name: 'Batman' }, { name: 'Superman' }];
+  test('should add a record to the collection', () => {
+    const model = new Model();
+    model.record(heroes);
+    expect(model.$collection).toEqual(heroes);
+  });
+
+  test('gets called when data is passed to Model constructor', () => {
+    const spy = jest.spyOn(Model.prototype, 'record');
+    const model = new Model(heroes);
+    expect(spy).toHaveBeenCalledWith(heroes);
+    expect(model.$collection).toEqual(heroes);
+    spy.mockRestore();
+  });
+});
